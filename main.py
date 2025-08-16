@@ -1,6 +1,7 @@
 import os
-import random
+#import random
 import pygame
+from pygame import mixer
 from player import Player
 # from planet import Planet
 
@@ -14,6 +15,13 @@ player_img_path = os.path.join(assert_dir, "player.png")
 
 # planet_names = ["1.png", "2.png", "3.png"]
 
+def play_sound(audio_name):
+     assert_dir = os.path.join(os.path.dirname(__file__), "assets", "sounds")
+     audio_path = os.path.join(assert_dir, audio_name)
+     mixer.music.load(audio_path)
+     mixer.music.play(-1)
+     
+
 def loading_screen():
 
     screen = pygame.display.set_mode((800, 533))
@@ -21,6 +29,7 @@ def loading_screen():
     icon = pygame.image.load(icon_path)
     pygame.display.set_icon(icon)
 
+    play_sound("background.wav")
     background = pygame.image.load(loading_background_path)
 
     font = pygame.font.Font(None, 100)
@@ -88,8 +97,10 @@ def game_screen():
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_LEFT:
                     player.move_left()
+                    player.sound("laser.wav")
                 if event.key == pygame.K_RIGHT:
                     player.move_right()
+                    player.sound("laser.wav")
 
             if event.type == pygame.KEYUP:
                 if event.key == pygame.K_LEFT or event.key == pygame.K_RIGHT:

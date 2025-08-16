@@ -1,5 +1,7 @@
 import os
 import pygame
+from pygame import mixer
+
 
 class Player:
     
@@ -40,3 +42,9 @@ class Player:
 
     def stop(self):
         self.player_x_change = 0
+
+    def sound(self, audio_name):
+        assert_dir = os.path.join(os.path.dirname(__file__), "assets", "sounds")
+        audio_path = os.path.join(assert_dir, audio_name)
+        audio = mixer.Sound(audio_path)
+        audio.play()
