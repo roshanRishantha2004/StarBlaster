@@ -1,8 +1,12 @@
+import os
 import pygame
 
 class Player:
     
-    def __init__(self, img_path, player_x, player_y):
+    def __init__(self, img_name, player_x, player_y):
+
+        assert_dir = os.path.join(os.path.dirname(__file__), "assets", "images")
+        img_path = os.path.join(assert_dir, img_name)
 
         try:
             self.image = pygame.image.load(img_path)
