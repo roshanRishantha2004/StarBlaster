@@ -1,6 +1,9 @@
 import pygame
-from assets import ICON_PATH, BACKGROUND_IMG_PATH, TITLE, PLAYER_IMG_PATH
+import random
+from assets import ICON_PATH, BACKGROUND_IMG_PATH, TITLE, PLAYER_IMG_PATH, ENEMY_IMG_PATH
 from player import Player
+from enemy import Enemy
+
 
 def game():
 
@@ -12,6 +15,7 @@ def game():
     icon = pygame.image.load(ICON_PATH)
     background = pygame.image.load(BACKGROUND_IMG_PATH)
     player = Player(PLAYER_IMG_PATH, 400, 450)
+    enemy = Enemy(ENEMY_IMG_PATH, random.randint(0, 800), random.randint(50, 200))
 
     pygame.display.set_icon(icon)
 
@@ -36,7 +40,9 @@ def game():
                     player.stop()
 
         player.draw(screen)
+        enemy.draw(screen)
         player.update()
+        enemy.update()
 
 
         pygame.display.update()
